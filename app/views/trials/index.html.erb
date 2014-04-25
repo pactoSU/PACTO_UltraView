@@ -1,0 +1,13 @@
+<html>
+<head>
+<script>
+function newContent()
+{
+	document.write(typeof window.atob("<%=@str%>"))
+}
+</script>
+</head>
+
+<body onload="newContent()">
+</body>
+</html>

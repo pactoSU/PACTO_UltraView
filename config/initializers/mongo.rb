@@ -1,0 +1,6 @@
+include Mongo
+
+MONGO_SERVER = 'localhost'
+MONGO_PORT = 27017
+MONGO_DB_NAME = 'dicom'
+MONGO_CLIENT = MongoClient.new(MONGO_SERVER,  MONGO_PORT).db(MONGO_DB_NAME)

@@ -1,1 +1,1 @@
-<H1>space world  </H1>
+<%= @coll.find("filename" => "A dicom file").each {|doc| %> <%= doc["_id"].to_s %> <br> <%} %>

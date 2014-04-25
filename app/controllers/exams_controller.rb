@@ -4,7 +4,15 @@ class ExamsController < ActionController::Base
   protect_from_forgery with: :exception
   
   
+  def index
+	@coll = MONGO_CLIENT["fs.files"]
+  end
+  
   def show
+	@file = Grid.new(MONGO_CLIENT).get(BSON::ObjectId("5359ab1468d60607ac000001"))
+  end
+  
+  def view
   end
   
 end
