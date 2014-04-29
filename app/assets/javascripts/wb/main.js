@@ -103,12 +103,13 @@ DcmApp.prototype.load_urllist_from_url = function(url)
 }
 DcmApp.prototype.load_string = function(dcmFile) {
 	var app = this;
-	//var decodedDcm = window.atob(dcmFile);
-	//var bigBuf = new Uint8Array();
-	//for (var i=0; i< decodedDcm.length; i++){
-	var base64 = require("sdk/base64");
-	var decodedDcm = base64.decode(dcmFile, "UTF-8");	
-	app.load_arraybuffer(decodedDcm, 0, 1);
+	var decodedDcm = window.atob(dcmFile);
+
+	var buffer=[];
+	for(var i=0,j=decodedDcm.length;i<j;++i){
+		buffer.push(decodedDcm.charCodeAt(i));
+	}
+	app.load_arraybuffer(buffer, 0, 1);
 }
 
 DcmApp.prototype.load_arraybuffer = function(abuf, index, file_count) {
