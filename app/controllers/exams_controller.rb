@@ -8,8 +8,8 @@ class ExamsController < ActionController::Base
 	@coll = MONGO_CLIENT["fs.files"]
   end
   
-  def show
-	@file = Grid.new(MONGO_CLIENT).get(BSON::ObjectId("5359ab1468d60607ac000001"))
+    def show
+	@file = Grid.new(MONGO_CLIENT).get(BSON::ObjectId( params[:id] ))
   end
   
   def view
