@@ -1,4 +1,4 @@
-<h1>Listing Dicom Images</h1>
+<h1>Listing Dicom Images for <%=current_user.name%></h1>
 
 <table>
   <tr>
@@ -11,7 +11,7 @@
 	<th>Download Image</th>
   </tr>
   
-<%=  MONGO_CLIENT["fs.files"].find("filename" => "A dicom file").each_with_index  {|doc, counter| %>
+<%=  MONGO_CLIENT["fs.files"].find("filename" => "A dicom file", "patient" => current_user.name).each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>
 	<td> <%= doc["modality"].to_s %> </td>
