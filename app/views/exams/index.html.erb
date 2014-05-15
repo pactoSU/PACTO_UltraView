@@ -12,7 +12,6 @@
 	<td> <%= counter %> </td>
 	<td> <%= doc["_id"].to_s %> </td>
 	<td> <%= link_to 'Show', {:action=> 'show' , :id=> doc["_id"].to_s }%> </td>
-	<td> <%= link_to 'Download as .bmp', {:action => 'download', :id => doc["_id"].to_s} %> </td>
   </tr>
 <%  } %>
 </table>

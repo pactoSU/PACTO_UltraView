@@ -2,7 +2,7 @@
 
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
+$grayMediumLight: #0e5fd8;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -35,10 +35,42 @@ textarea {
   }
 }
 
+/* Image Formatting */ 
+
+#parent_div_1, #parent_div_3{
+    width:100px;
+    margin-right:10px;
+    float:left;
+}
+
+#parent_div_2{
+  width:200px;
+  margin-left:10px;
+  margin-top:20px;
+  float: right;
+}
+
+.box2 {
+  display: inline-block;
+  width: 400px;
+  margin: 1em;
+}
+
+ .left{
+   width:140px;
+   float:left;
+   height:100%;
+ }
+
+ .right{
+   margin-left:140px;
+ }
+
 /* typography */
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, a {
   line-height: 1;
+  font-family: 'Lato', sans-serif;
 }
 
 h1 {
@@ -54,12 +86,13 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  color: $grayMediumLight;
 }
 
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  font-family: 'Lato', sans-serif;
 }
 
 
@@ -69,11 +102,12 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
+  color: grayMediumLight;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
-  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+
   line-height: 1;
   &:hover {
     color: white;
@@ -87,11 +121,12 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  color: $grayMediumLight;
+  font-family: 'Lato', sans-serif;
   a {
-    color: $gray;
+    color: $grayMediumLight;
     &:hover {
-      color: $grayDarker;
+      color: $grayMediumLight;
     }
   }
   small {
@@ -121,7 +156,7 @@ footer {
 aside {
   section{
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid $grayMediumLight;
     &:first-child {
       border: 0;
       padding-top: 0;
@@ -137,6 +172,7 @@ aside {
       letter-spacing: -1px;
       margin-bottom: 3px;
       margin-top: 0px;
+      font-family: 'Lato', sans-serif;
     }
   }
 }
@@ -144,6 +180,35 @@ aside {
 .gravatar {
   float: left;
   margin-right: 10px;
+}
+
+.stats { 
+  overflow: auto;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayMediumLight;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+  strong { 
+    display: block;
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
 }
 
 /* forms */
@@ -177,12 +242,13 @@ input {
 .users {
   list-style: none;
   margin: 0;
+  font-family: 'Lato', sans-serif;
   li {
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid $grayMediumLight;
     &:last-child {
-      border-bottom: 1px solid $grayLighter;
+      border-bottom: 1px solid $grayMediumLight;
     }
   }
 }
@@ -201,10 +267,12 @@ input {
 
 .content {
   display: block;
+  font-family: 'Lato', sans-serif;
 }
 
 .timestamp {
-  color: $grayLight;
+  color: $grayMediumLight;
+  font-family: 'Lato', sans-serif;
 }
 
 .gravatar {

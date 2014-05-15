@@ -1,4 +1,8 @@
+<% provide(:title, 'Image Viewing') %>
 <%= javascript_include_tag "application" %>
+
+
+<body>
 <script type="text/javascript">
 	var app = new DcmApp('view-area');
 	
@@ -41,8 +45,6 @@
     </div>
 
     <div id="viewer" class="box">
-        <h2>Viewer</h2>
-		<%= link_to 'Back', exams_path %>
         <div id="viewer-bar">
             <div id="view-metadata" class="tool-button">Metadata</div>
             <select id="clut-select">
@@ -64,3 +66,4 @@
 	<tbody>
 	</tbody>
 </table>
+</body>

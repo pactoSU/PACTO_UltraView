@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-PACTOUltraview::Application.config.secret_key_base = '2b65a2fd81e39dd37e012f2180a42c93806fc2ba2157d47fdcbbfae8804a5b302f1ca2f1be9fc043b15ae02f76ca60f1e0fd769c08d072bcb37b7f4d9a8e59ce'
+require 'securerandom'
+
+def secure_token
+	token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+SampleApp::Application.config.secret_key_base = secure_token

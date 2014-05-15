@@ -10,10 +10,18 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/db/Mongo
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
 
-
-/db
+# Ignore other unneeded files.
+# database.yml
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.idea
+.secret

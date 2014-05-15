@@ -1,0 +1,34 @@
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+    </aside>
+    <div class="span8">
+      <%= render 'exams/index' %>
+    </div>
+  </div>
+<% else %>
+  <div class="center hero-unit">
+    <h1>Welcome to Ultra View</h1>
+
+    <h2>
+      This is the home page for the
+      <a href="http://www.usa.philips.com/">Philips</a>
+      Dicom Ultra View.
+    </h2>
+
+    <%= link_to "Sign up now!", signup_path,
+                                class: "btn btn-large btn-primary" %>
+  </div>
+
+  <div id='parent_div_1'>
+  <%= link_to image_tag("suseal.png", alt: "SU CPSC"), 'https://www.seattleu.edu/scieng/comsci/' %>
+  </div>
+
+  <div id='parent_div_2'>
+  <%= link_to image_tag("Philips.png", alt: "Philips"), 'http://www.usa.philips.com/'%>
+  </div>
+
+<% end %>

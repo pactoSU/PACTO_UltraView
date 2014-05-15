@@ -1,0 +1,66 @@
+<% provide(:title, 'Viewer') %>
+<script type="text/javascript">
+	var app = new DcmApp('view-area');
+	
+	
+	
+	var ready;
+	ready = function() {
+	app.init();
+	app.load_url("http://x.babymri.org/?53320924&dcm", 0 , 1);
+	app.curr_file_idx = 0;
+	app.draw_image();
+	for(clut in cluts) {
+            $("#clut-select optgroup").append($("<option>").val(clut).text(clut));
+        }
+	
+	$("#clut-select").change(function() {
+            app.set_clut($(this).val());
+        });
+	 $("#view-metadata").click(function() {
+            app.fill_metadata_table();
+            $("#metadata-dialog").dialog({
+                modal: true,
+                width: 600,
+                button: {
+                    'Ok': function() {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+        });
+
+	};
+
+	$(document).ready(ready);
+	$(document).on('page:load', ready);
+	
+	</script>
+   <div id="view-area" style="height:600px">
+        
+    </div>
+
+    <div id="viewer" class="box">
+        <h2>Viewer</h2>
+		
+        <div id="viewer-bar">
+            <div id="view-metadata" class="tool-button">Metadata</div>
+            <select id="clut-select">
+                <optgroup label="CLUT">
+                </optgroup>
+            </select>
+            <div id="button-bar-horz">
+                <div id="butt-reset" class="tool-button">Reset</div>
+            </div>
+        </div>
+<table id="metadata-table" width="100%">
+		<thead>
+			<tr>
+				<td width="15%">Tag</td>
+				<td width="40%">Name</td>
+				<td width="35%">Value</td>
+			</tr>
+		</thead>
+	<tbody>
+	</tbody>
+</table>
