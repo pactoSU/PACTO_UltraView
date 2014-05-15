@@ -1,17 +1,6 @@
-<h1>Listing Dicom Images</h1>
+		<section>
+		
+		<%= render 'exams/index' %>
 
-<table>
-  <tr>
-    <th>Index</th>
-    <th>Id</th>
-	<th>Show Image</th>
-  </tr>
-  
-<%=  @coll.find("filename" => "A dicom file").each_with_index  {|doc, counter| %>
-  <tr>
-	<td> <%= counter %> </td>
-	<td> <%= doc["_id"].to_s %> </td>
-	<td> <%= link_to 'Show', {:action=> 'show' , :id=> doc["_id"].to_s }%> </td>
-  </tr>
-<%  } %>
-</table>
+
+		</section>
