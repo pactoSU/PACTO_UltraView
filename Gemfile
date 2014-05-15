@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+#ruby '2.0.0'
 #ruby-gemset=railstutorial_rails_4_0
 
 gem 'rails', '4.0.2'
@@ -60,4 +60,5 @@ gem 'mongo_mapper'
 gem 'dicom'
 gem 'bson_ext'
 gem 'daemons'
+gem 'mini_magick'
 

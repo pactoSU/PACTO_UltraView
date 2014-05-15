@@ -1,6 +1,7 @@
 PACTOUltraview::Application.routes.draw do
   resources :exams, :trials
  match '/view',    to: 'exams#view',    via: 'get'
+ match '/download', to:'exams#download', via: 'get'
  match '/viewDicom/:id',    to: 'exams#viewDicom',    via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

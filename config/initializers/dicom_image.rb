@@ -1,0 +1,1 @@
+DICOM.image_processor = :mini_magick
