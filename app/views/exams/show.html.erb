@@ -11,7 +11,7 @@
 	var ready;
 	ready = function() {
 	app.init();
-	app.load_string("<%=Base64.strict_encode64(@file.read())%>");
+	app.load_string("<%= Base64.strict_encode64(@file.read()) %>");
 	app.curr_file_idx = 0;
 	app.draw_image();
 	for(clut in cluts) {
@@ -40,7 +40,10 @@
 	$(document).on('page:load', ready);
 	
 	</script>
-   <div id="view-area" style="height:600px">
+   <div id="view-area" style="height:700px">
+        
+    </div>
+	<div id="control-area" style="height:120px">
         
     </div>
 			<%= link_to 'Back', exams_path %>

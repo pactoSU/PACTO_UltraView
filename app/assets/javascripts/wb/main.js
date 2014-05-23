@@ -104,7 +104,7 @@ DcmApp.prototype.load_urllist_from_url = function(url)
 DcmApp.prototype.load_string = function(dcmFile) {
 	var app = this;
 	var decodedDcm = window.atob(dcmFile);
-
+	//var decodedDcm = dcmFile;
 	var buffer=[];
 	for(var i=0,j=decodedDcm.length;i<j;++i){
 		buffer.push(decodedDcm.charCodeAt(i));
@@ -276,6 +276,10 @@ DcmApp.prototype.draw_image = function() {
     var curr_file = this.files[this.curr_file_idx];
     if(curr_file == undefined)
         return;
+		
+	var text = document.getElementById("reportText");
+	$("#reportText").text(curr_file.NumberOfFrames);
+	
     $("#size_info").text(curr_file.Rows + "x" + curr_file.Columns);
     $("#sliceidx_info").text(this.curr_file_idx+1 + "/" + this.files.length);
     $("#slider").slider("option", "value", this.curr_file_idx);
@@ -375,6 +379,7 @@ DcmApp.prototype._init_painter = function(painter) {
 DcmApp.prototype.init = function() {
     // Create canvas inside this.divid
     this.viewarea = document.getElementById(this.viewareaid);
+	var controlArea = document.getElementById('control-area');
     this.canvas = document.createElement('canvas');
     this.canvas.id = 'maincanvas'; // TODO: Unique of use of prefix
     this.canvas.width = this.viewarea.clientWidth - 1;
@@ -383,7 +388,7 @@ DcmApp.prototype.init = function() {
     this.viewarea.appendChild(this.canvas);
     // Create infobox
     create_image_infobox(this.viewarea);
-
+	create_loop_controls(controlArea);
     var painters = [
         function(cid) { return new GLPainter(cid); },
         function(cid) { return new CanvasPainter(cid); },

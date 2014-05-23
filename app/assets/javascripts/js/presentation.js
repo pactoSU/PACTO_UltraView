@@ -153,3 +153,28 @@ function create_image_infobox(viewarea) {
     infodiv.appendChild(infolist);
     viewarea.appendChild(infodiv);
 }
+function create_loop_controls(controlArea) {
+    var controldiv = document.createElement('div');
+    controldiv.id = 'controls';
+    controldiv.style.position = "absolute";
+    controldiv.style.color = "black";
+    controldiv.style.fontSize = "14px";
+
+	var reportText = document.createElement("p");
+	reportText.id = "reportText";
+	
+	var forwardButton = document.createElement("button");
+	forwardButton.id = "fowardButton";
+	var forwardText = document.createTextNode(">");
+	forwardButton.appendChild(forwardText);
+	
+	var backwardButton = document.createElement("button");
+	backwardButton.id = "backwardButton";
+	var backwardText = document.createTextNode("<");
+	backwardButton.appendChild(backwardText);
+        
+	controldiv.appendChild(backwardButton);
+	controldiv.appendChild(reportText);
+    controldiv.appendChild(forwardButton);
+    controlArea.appendChild(controldiv);
+}
