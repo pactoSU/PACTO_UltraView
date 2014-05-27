@@ -1,0 +1,7 @@
+<% provide(:title, 'Image Viewing') %>
+<%= javascript_include_tag "application" %>
+
+<body>
+<%= image_tag url_for(:controller => "exams", :action => "updateFrame") %>
+<%= link_to "Next frame", :action => "incrementFrame", :remote => true %>
+</body>

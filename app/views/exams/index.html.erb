@@ -20,6 +20,7 @@
 	<td> <%= doc["studyId"].to_s %> </td>
 	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
 	<td> <%= link_to 'Download as .bmp', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
+	<td> <%= link_to 'staticview5', {:controller=> 'exams', :action => 'dispImage', :id => doc["_id"].to_s, :frame =>1} %> </td>
   </tr>
 <%  } %>
 </table>

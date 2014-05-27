@@ -3,6 +3,7 @@ class ExamsController < ApplicationController
   
   def index
 	@coll = MONGO_CLIENT["fs.files"]
+	
   end
   
   def show
@@ -13,10 +14,30 @@ class ExamsController < ApplicationController
   end
     
   def download
-	file_str = Grid.new(MONGO_CLIENT).get(BSON::ObjectId(params[:id])).read
+  
+	nameOfFile = params[:id]
+	file_str = Grid.new(MONGO_CLIENT).get(BSON::ObjectId(nameOfFile)).read
 	dcmImg = DICOM::DObject.parse(file_str).image
 	stream = StringIO.new
 	dcmImg.write(stream)
-	send_data stream.string, :filename => "dcm.bmp"
+	send_data stream.string, :filename => nameOfFile+".bmp"
   end
+  
+    def dispImage
+	@@curFrame = params[:frame].to_i
+	file_str = Grid.new(MONGO_CLIENT).get(BSON::ObjectId(params[:id])).read
+	@@dcmFile = DICOM::DObject.parse(file_str)
+  end
+  
+  def updateFrame
+	dcmImg = @@dcmFile.image(:frame => @@curFrame)
+	stream = StringIO.new
+	dcmImg.write(stream)
+	send_data stream.string, :type => 'image/png',:disposition => 'inline'
+  end
+  
+  def incrementFrame
+	@@curFrame = @@curFrame+1
+	controller.updateFrame
+	end
 end
