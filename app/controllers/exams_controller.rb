@@ -40,4 +40,7 @@ class ExamsController < ApplicationController
 	@@curFrame = @@curFrame+1
 	controller.updateFrame
 	end
+	
+	def search
+	end
 end

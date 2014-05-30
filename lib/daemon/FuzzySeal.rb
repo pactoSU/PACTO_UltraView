@@ -151,7 +151,8 @@ end
 
 class Stream
 	def write()
-      @file[0].put(@string, @file[1]) #@file is now a gridfs object
+			meta = @file[1].merge({:filename => "A dicom file"})
+      @file[0].put(@string, meta) #@file is now a gridfs object
     end
 end
 

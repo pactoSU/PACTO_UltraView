@@ -24,3 +24,9 @@
   </tr>
 <%  } %>
 </table>
+
+<%= form_tag("/exams/search", method: "get") do %>
+  <%= label_tag(:tag, "Tag:") %>
+  <%= text_field_tag(:tag) %>
+  <%= submit_tag("Search") %>
+<% end %>
