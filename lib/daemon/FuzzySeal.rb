@@ -14,7 +14,7 @@ SCP_PORT = 10000
 
 class FileHandler
 	def self.save_file(grid, dcm, transfer_syntax)
-      dcm.write(grid, :transfer_syntax => transfer_syntax)
+      dcm.write(grid, :transfer_syntax => transfer_syntax, :tags => dcm.to_hash)
       message = [:info, "DICOM file saved to gridfs"]
       return message
     end
@@ -151,7 +151,7 @@ end
 
 class Stream
 	def write()
-      @file.put(@string, :filename => "A dicom file") #@file is now a gridfs object
+      @file[0].put(@string, @file[1]) #@file is now a gridfs object
     end
 end
 
@@ -160,7 +160,7 @@ class DObject
       #raise ArgumentError, "Invalid file_name. Expected String, got #{file_name.class}." unless file_name.is_a?(String)
       @include_empty_parents = options[:include_empty_parents]
       insert_missing_meta unless options[:ignore_meta]
-      write_elements(:grid => grid, :signature => true, :syntax => transfer_syntax)
+      write_elements(:grid => [grid, options[:tags]], :signature => true, :syntax => transfer_syntax)
     end
 end
 
