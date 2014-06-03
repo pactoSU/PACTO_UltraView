@@ -40,7 +40,16 @@ class ExamsController < ApplicationController
 	@@curFrame = @@curFrame+1
 	controller.updateFrame
 	end
-	
+
+
+  def delete
+  		nameOfFile = params[:id]
+		MONGO_CLIENT["fs.files"].remove("_id"=> BSON::ObjectId(nameOfFile))
+		flash[:success] = "Image deleted."
+		redirect_to exams_path
+		end
+		
+		
 	def search
 	end
 end

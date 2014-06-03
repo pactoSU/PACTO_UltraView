@@ -1,6 +1,6 @@
 <h1>Listing Dicom Images for <%=current_user.name%></h1>
 
-<table>
+<table class="table">
   <tr>
     <th>Index</th>
 	<th>Type</th>
@@ -9,9 +9,12 @@
 	<th>Study Id</th>
 	<th>Show Image</th>
 	<th>Download Image</th>
+	<% if current_user.admin == true %>
+	<th>Delete</th>
+	<%end%>
   </tr>
   
-<%=  MONGO_CLIENT["fs.files"].find("filename" => "A dicom file", "patient" => current_user.name).each_with_index  {|doc, counter| %>
+<%  MONGO_CLIENT["fs.files"].find("filename" => "A dicom file").each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>
 	<td> <%= doc["modality"].to_s %> </td>
@@ -19,7 +22,10 @@
 	<td> <%= doc["patient"].to_s %> </td>
 	<td> <%= doc["studyId"].to_s %> </td>
 	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
-	<td> <%= link_to 'Download as .bmp', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
+	<td> <%= link_to 'Download', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
+	<% if current_user.admin == true %>
+	<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
+  <%end%>
   </tr>
 <%  } %>
 </table>

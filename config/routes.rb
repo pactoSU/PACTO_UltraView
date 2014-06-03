@@ -21,6 +21,7 @@ UltraView::Application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/view',    to: 'static_pages#view',    via: 'get'
   match '/download', to:'exams#download', via: 'get'
+    match '/delete', to:'exams#delete', via: 'get'
    match '/dispImage', to:'exams#dispImage', via: 'get'
 match '/updateFrame', to:'exams#updateFrame', via: 'get'
 match '/incrementFrame', to:'exams#incrementFrame', via: 'get'
