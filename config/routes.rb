@@ -23,6 +23,7 @@ UltraView::Application.routes.draw do
   match '/download', to:'exams#download', via: 'get'
     match '/delete', to:'exams#delete', via: 'get'
    match '/dispImage', to:'exams#dispImage', via: 'get'
+	match '/search', to:'exams#search', via: 'get'
 match '/updateFrame', to:'exams#updateFrame', via: 'get'
 match '/incrementFrame', to:'exams#incrementFrame', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.

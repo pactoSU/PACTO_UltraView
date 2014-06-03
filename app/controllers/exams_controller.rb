@@ -51,5 +51,6 @@ class ExamsController < ApplicationController
 		
 		
 	def search
+		@cursor = MONGO_CLIENT["fs.files"].find({params[:tag] => params[:val]})
 	end
 end
