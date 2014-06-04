@@ -1,4 +1,4 @@
-<h1>Listing Dicom Images for <%=current_user.name%></h1>
+
 
 <table class="table">
   <tr>
@@ -14,7 +14,7 @@
 	<%end%>
   </tr>
   
-<%  MONGO_CLIENT["fs.files"].find("filename" => "A dicom file").each_with_index  {|doc, counter| %>
+<% @cursor.each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>
 	<td> <%= doc["modality"].to_s %> </td>
