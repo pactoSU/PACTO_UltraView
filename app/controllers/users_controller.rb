@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user,  
                 only: [:index, :edit, :update, :destroy, :following, :followers]
-  before_action :correct_user,    only: [:edit, :update]
+				before_action :correct_user,    only: [:edit, :update]
   before_action :admin_user,      only: :destroy
 
   def index
@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-	@coll = MONGO_CLIENT["fs.files"]
   end
 
   def new
@@ -36,12 +35,15 @@ class UsersController < ApplicationController
   end
 
   def edit
+  
   end
 
   def update
-    if @user.update_attributes(user_params)
+  
+
+    if @user.update_attributes(edit_params)
       flash[:success] = "Profile updated"
-      redirect_to @user
+      redirect_to users_path
     else
       render 'edit'
     end
@@ -67,12 +69,15 @@ class UsersController < ApplicationController
   		params.require(:user).permit(:name, :email, :password, :password_confirmation)
   	end
 
+	def edit_params
+  		params.require(:user).permit(:name, :email)
+  	end
+
     # Before filters jh
 
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user) 
     end
 
     def admin_user

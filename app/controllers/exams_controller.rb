@@ -36,17 +36,11 @@ class ExamsController < ApplicationController
 	send_data stream.string, :type => 'image/png',:disposition => 'inline'
   end
   
-  def incrementFrame
-	@@curFrame = @@curFrame+1
-	controller.updateFrame
-	end
-
-
   def delete
   		nameOfFile = params[:id]
 		MONGO_CLIENT["fs.files"].remove("_id"=> BSON::ObjectId(nameOfFile))
 		flash[:success] = "Image deleted."
-		redirect_to exams_path
+		redirect_to :back
 		end
 		
 		

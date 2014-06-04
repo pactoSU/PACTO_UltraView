@@ -1,4 +1,7 @@
-
+<% count = MONGO_CLIENT["fs.files"].count() %>
+<% if count == 0 %>
+<p> No files found in database </p>
+<% else %>
 
 <table class="table">
   <tr>
@@ -7,20 +10,20 @@
     <th>Physician</th>
 	<th>Patient Name</th>
 	<th>Study Id</th>
-	<th>Show Image</th>
-	<th>Download Image</th>
+	<th>Show Media</th>
+	<th>Download Media</th>
 	<% if current_user.admin == true %>
 	<th>Delete</th>
 	<%end%>
   </tr>
   
-<% @cursor.each_with_index  {|doc, counter| %>
+<%  MONGO_CLIENT["fs.files"].find("filename" => "A dicom file").each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>
-	<td> <%= doc["modality"].to_s %> </td>
-	<td> <%= doc["physician"].to_s %> </td>
-	<td> <%= doc["patient"].to_s %> </td>
-	<td> <%= doc["studyId"].to_s %> </td>
+	<td> <%= doc["Modality"].to_s %> </td>
+	<td> <%= doc["Referring Physician's Name"].to_s %> </td>
+	<td> <%= doc["Patient's Name"].to_s %> </td>
+	<td> <%= doc["Study Date"].to_s %> </td>
 	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
 	<td> <%= link_to 'Download', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
 	<% if current_user.admin == true %>
@@ -29,3 +32,4 @@
   </tr>
 <%  } %>
 </table>
+<% end %>
