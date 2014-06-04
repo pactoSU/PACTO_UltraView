@@ -29,10 +29,10 @@
 	<% if current_user.admin == true %>
 	<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
   <%end%>
-  </tr>
+	</tr>
 <%  } %>
   <% else %>
-<%  MONGO_CLIENT["fs.files"].find("Patient's Name"=> current_user.name).each_with_index  {|doc, counter| %>
+<%  MONGO_CLIENT["fs.files"].find({ "$or"=> [ { "Patient's Name"=> current_user.name }, { "Referring Physician's Name" => current_user.name } ] }).each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>
 	<td> <%= doc["Modality"].to_s %> </td>
@@ -44,7 +44,7 @@
 	<% if current_user.admin == true %>
 	<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
   <%end%>
-  </tr>
+	</tr>
 <%  } %>
 <%end%>
 

@@ -388,9 +388,10 @@ DcmApp.prototype.init = function() {
     this.viewarea.appendChild(this.canvas);
     // Create infobox
     create_image_infobox(this.viewarea);
-	create_loop_controls(controlArea);
+	//create_loop_controls(controlArea);
     var painters = [
-        function(cid) { return new GLPainter(cid); }
+        function(cid) { return new GLPainter(cid); },
+		function(cid) { return new CanvasPainter(cid); }
     ];
     for(var i in painters) {
         var painter = painters[i](this.canvas.id);

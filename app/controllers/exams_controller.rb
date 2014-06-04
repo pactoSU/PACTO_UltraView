@@ -45,6 +45,10 @@ class ExamsController < ApplicationController
 		
 		
 	def search
-		@cursor = MONGO_CLIENT["fs.files"].find({params[:tag] => params[:val]})
+		parameter = params[:tag] 
+		if (parameter =~  /\d+,\d+/)
+		parameter = DICOM::LIBRARY.as_name(parameter)
+		end
+		@cursor = MONGO_CLIENT["fs.files"].find({parameter => params[:val]})
 	end
 end

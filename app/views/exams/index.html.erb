@@ -1,3 +1,5 @@
+<% if signed_in? %>
+<% if current_user.admin == true %>
 <h1>All DICOM Images</h1>
 
 <table class="table">
@@ -29,4 +31,6 @@
   </tr>
 <%  } %>
 </table>
-
+<% end %>
+<p> Access Denied: You need to be an admin to access this page. <p>
+<% end %>
