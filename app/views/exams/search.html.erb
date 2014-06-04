@@ -1,4 +1,19 @@
 <% if signed_in? %>
+  <% 	if (@parameter =~  /\d+,\d+/)  %>  
+	<% 		@parameter = DICOM::LIBRARY.as_name(@parameter) %>
+		<% end %>
+		
+	<% 	if (@value == "" and @parameter == "")  %>
+	<% 		@cursor = MONGO_CLIENT["fs.files"].find({"accessList"=> current_user.name })  %>
+<% elsif (@value == "" and @parameter !="")  %>
+	<% 		@cursor = MONGO_CLIENT["fs.files"].find( { "$and"=> [{"accessList"=> current_user.name },{@parameter=> { "$exists" => true} } ] })   %>
+
+		<% else %>
+	<% 		@cursor = MONGO_CLIENT["fs.files"].find({ "$and"=> [{"accessList"=> current_user.name },{@parameter=>  @value } ] }) %>
+	<% 	end    %>
+
+
+
 	<h1>Search DICOM Images</h1>
 	
 	
@@ -19,7 +34,6 @@
 	<th>Delete</th>
 	<%end%>
   </tr>
-  
 <%  @cursor.each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>

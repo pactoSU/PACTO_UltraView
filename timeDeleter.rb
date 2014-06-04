@@ -16,9 +16,9 @@ db = MongoClient.new(MONGO_SERVER, MONGO_PORT).db(DB_NAME)
 
 
 loop do
-  sleep(60)
+  sleep(5)
   time = Time.now
   deleteDate = (time - (60))
   db["fs.files"].remove({"insertTime"=> {"$lt"=> deleteDate} })
-  puts "delete"
+  puts "Checking for files to delete"
 end
