@@ -14,6 +14,7 @@ SCP_PORT = 10000
 
 class FileHandler
 	def self.save_file(grid, dcm, transfer_syntax)
+
       dcm.write(grid, :transfer_syntax => transfer_syntax, :tags => dcm.to_hash)
       message = [:info, "DICOM file saved to gridfs"]
       return message
@@ -151,8 +152,10 @@ end
 
 class Stream
 	def write()
+		    time = Time.now
 			meta = @file[1].merge({:filename => "A dicom file"})
-      @file[0].put(@string, meta) #@file is now a gridfs object
+			meta = meta.merge({:insertTime => time})
+      @file[0].put(@string,  meta) #@file is now a gridfs object
     end
 end
 
