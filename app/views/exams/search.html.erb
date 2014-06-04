@@ -1,39 +1,13 @@
-<h1>Search DICOM Images</h1>
-
-<table class="table">
-  <tr>
-    <th>Index</th>
-	<th>Type</th>
-    <th>Physician</th>
-	<th>Patient Name</th>
-	<th>Study Id</th>
-	<th>Show Image</th>
-	<th>Download Image</th>
-	<th>StaticView5</th>
-	<th>Delete</th>
-  </tr>
- 
-<% @cursor.each_with_index  {|doc, counter| %>
-  <tr>
-	<td> <%= counter %> </td>
-	<td> <%= doc["Modality"].to_s %> </td>
-	<td> <%= doc["physician"].to_s %> </td>
-	<td> <%= doc["Patient's Name"].to_s %> </td>
-	<td> <%= doc["studyId"].to_s %> </td>
-	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
-	<td> <%= link_to 'Download as .bmp', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
-	<td> <%= link_to 'staticview5', {:controller=> 'exams', :action => 'dispImage', :id => doc["_id"].to_s, :frame =>1} %> </td>
-	<% if current_user.admin  %>
-	<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
-		<% end%>
-  </tr>
-<%  } %>
-</table>
-
-<%= form_tag("/search", method: "get") do %>
-  <%= label_tag(:tag, "Tag:") %>
-  <%= text_field_tag(:tag) %>
-  <%= label_tag(:val, "Value:") %>
-  <%= text_field_tag(:val) %>
-  <%= submit_tag("Search") %>
+<% if signed_in? %>
+	<h1>Search DICOM Images</h1>
+	<%= render 'exams/index' %>
+	<%= form_tag("/search", method: "get") do %>
+	<%= label_tag(:tag, "Tag:") %>
+	<%= text_field_tag(:tag) %>
+	<%= label_tag(:val, "Value:") %>
+	<%= text_field_tag(:val) %>
+	<%= submit_tag("Search") %>
+	<% end %>
+<% else %>
+	<%= render 'static_pages/noLogin' %>
 <% end %>

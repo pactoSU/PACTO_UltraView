@@ -13,7 +13,7 @@
 	<th>Delete</th>
   </tr>
  
-<% @coll.find("filename" => "A dicom file").each_with_index  {|doc, counter| %>
+<% @cursor.each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>
 	<td> <%= doc["Modality"].to_s %> </td>
