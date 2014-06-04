@@ -45,10 +45,29 @@ class ExamsController < ApplicationController
 		
 		
 	def search
-		parameter = params[:tag] 
+		parameter = params[:tag]
+		value = params[:val]
+		
 		if (parameter =~  /\d+,\d+/)
-		parameter = DICOM::LIBRARY.as_name(parameter)
+			parameter = DICOM::LIBRARY.as_name(parameter)
 		end
-		@cursor = MONGO_CLIENT["fs.files"].find({parameter => params[:val]})
+		
+		if (value == "" and parameter == "")
+			@cursor = MONGO_CLIENT["fs.files"].find({})
+		elsif (value == "" and parameter !="")
+			@cursor = MONGO_CLIENT["fs.files"].find({parameter=> { "$exists" => true} })
+
+		else
+			@cursor = MONGO_CLIENT["fs.files"].find({parameter => value})
+		end
+		
 	end
+	
+	
+	
+	
+	def share
+		@cursor = MONGO_CLIENT["fs.files"].find("_id"=>BSON::ObjectId( params[:id] ))
+	end
+		
 end

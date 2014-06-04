@@ -12,6 +12,7 @@
 	<th>Study Id</th>
 	<th>Show Media</th>
 	<th>Download Media</th>
+	<th>Share Media</th>
 	<% if current_user.admin == true %>
 	<th>Delete</th>
 	<%end%>
@@ -32,7 +33,7 @@
 	</tr>
 <%  } %>
   <% else %>
-<%  MONGO_CLIENT["fs.files"].find({ "$or"=> [ { "Patient's Name"=> current_user.name }, { "Referring Physician's Name" => current_user.name } ] }).each_with_index  {|doc, counter| %>
+<%  MONGO_CLIENT["fs.files"].find({"accessList"=> current_user.name }).each_with_index  {|doc, counter| %>
   <tr>
 	<td> <%= counter %> </td>
 	<td> <%= doc["Modality"].to_s %> </td>
@@ -41,6 +42,7 @@
 	<td> <%= doc["Study Date"].to_s %> </td>
 	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
 	<td> <%= link_to 'Download', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
+	<td> <%= link_to 'Share', {:controller=> 'exams', :action=> 'share' , :id=> doc["_id"].to_s }%> </td>
 	<% if current_user.admin == true %>
 	<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
   <%end%>

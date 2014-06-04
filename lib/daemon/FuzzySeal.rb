@@ -15,7 +15,7 @@ SCP_PORT = 10000
 class FileHandler
 	def self.save_file(grid, dcm, transfer_syntax)
 
-      dcm.write(grid, :transfer_syntax => transfer_syntax, :tags => dcm.to_hash)
+      dcm.write(grid,dcm, :transfer_syntax => transfer_syntax, :tags => dcm.to_hash)
       message = [:info, "DICOM file saved to gridfs"]
       return message
     end
@@ -75,7 +75,7 @@ class FileHandler
 end
 
 class Parent
-	def write_elements(options={})
+	def write_elements(dcm, options={})
 	  @file = options[:grid]
       # Go ahead and write if the file was opened successfully:
       if @file
@@ -99,7 +99,7 @@ class Parent
         write_signature if options[:signature]
         write_data_elements(children)
 		
-		@stream.write()
+		@stream.write(dcm)
         # Mark this write session as successful:
         @write_success = true
       end
@@ -151,20 +151,26 @@ class Parent
 end
 
 class Stream
-	def write()
+	def write(dcm)
 		    time = Time.now
+			patient = dcm.value("0010,0010")
+			physician = dcm.referring_physicians_name.value
+
+			#puts dcm.value("Referring Physician's Name")
 			meta = @file[1].merge({:filename => "A dicom file"})
 			meta = meta.merge({:insertTime => time})
+			meta = meta.merge({:accessList => [patient, physician]})
+			
       @file[0].put(@string,  meta) #@file is now a gridfs object
     end
 end
 
 class DObject
-	def write(grid, options={})
+	def write(grid, dcm, options={})
       #raise ArgumentError, "Invalid file_name. Expected String, got #{file_name.class}." unless file_name.is_a?(String)
       @include_empty_parents = options[:include_empty_parents]
       insert_missing_meta unless options[:ignore_meta]
-      write_elements(:grid => [grid, options[:tags]], :signature => true, :syntax => transfer_syntax)
+      write_elements(dcm,:grid => [grid, options[:tags]], :signature => true, :syntax => transfer_syntax)
     end
 end
 

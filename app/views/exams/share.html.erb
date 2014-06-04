@@ -1,0 +1,17 @@
+<% if signed_in? %>
+	
+	
+  
+<%  @cursor.each_with_index  {|doc, counter| %>
+	<p> 
+	<%= doc["Modality"].to_s %> 
+	<br> <%= doc["Referring Physician's Name"].to_s %> 
+	<br> <%= doc["Patient's Name"].to_s %> 
+	<br> <%= doc["Study Date"].to_s %> 
+	<br> 
+	</p>
+
+<%  } %>
+
+
+<% end %>
