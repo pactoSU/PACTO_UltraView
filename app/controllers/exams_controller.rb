@@ -67,7 +67,22 @@ class ExamsController < ApplicationController
 	
 	
 	def share
-		@cursor = MONGO_CLIENT["fs.files"].find("_id"=>BSON::ObjectId( params[:id] ))
+		@id =  params[:id]
+		@cursor = MONGO_CLIENT["fs.files"].find("_id"=>BSON::ObjectId(@id ))
+	end
+	
+	def addUser
+	userName = params[:user]
+
+	if User.exists?(:name => userName)
+
+	redirect_to root_path
+	else
+
+	redirect_to  :back 
+	end
+
+		
 	end
 		
 end

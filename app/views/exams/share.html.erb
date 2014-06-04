@@ -3,15 +3,20 @@
 	
   
 <%  @cursor.each_with_index  {|doc, counter| %>
-	<p> 
-	<%= doc["Modality"].to_s %> 
-	<br> <%= doc["Referring Physician's Name"].to_s %> 
-	<br> <%= doc["Patient's Name"].to_s %> 
-	<br> <%= doc["Study Date"].to_s %> 
+	<p>   Modality: <%= doc["Modality"].to_s %> 
+	<br> Physician's Name: <%= doc["Referring Physician's Name"].to_s %> 
+	<br> Patient's Name: <%= doc["Patient's Name"].to_s %> 
+	<br> Study Date: <%= doc["Study Date"].to_s %> 
 	<br> 
 	</p>
 
 <%  } %>
 
+
+<%= form_tag(:controller=> "exams", :action => "addUser") do %>
+	<%= label_tag(:user, "Name of user you would like to share with:") %>
+	<%= text_field_tag(:user) %>
+	<%= submit_tag ("Share With User") %>
+	<% end %>
 
 <% end %>

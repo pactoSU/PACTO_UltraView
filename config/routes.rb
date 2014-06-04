@@ -24,6 +24,8 @@ UltraView::Application.routes.draw do
   match '/delete', to:'exams#delete', via: 'get'
   match '/search', to:'exams#search', via: 'get'
   match '/share', to:'exams#share', via: 'get'
+   match '/addUser', to:'exams#addUser', via: 'post'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
