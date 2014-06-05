@@ -1,60 +1,61 @@
 <% if signed_in? %>
-<% count = MONGO_CLIENT["fs.files"].count() %>
-<% if count == 0 %>
-<p> No files found in database </p>
-<% else %>
-<% if current_user.admin == true %>
-<table class="table">
-  <tr>
-    <th>Index</th>
-	<th>Type</th>
-    <th>Physician</th>
-	<th>Patient Name</th>
-	<th>Study Id</th>
-	<th>Show Media</th>
-	<th>Download Media</th>
-	<th>Share Media</th>
-	<th>Delete</th>
-  </tr>
-<%  MONGO_CLIENT["fs.files"].find().each_with_index  {|doc, counter| %>
-  <tr>
-	<td> <%= counter %> </td>
-	<td> <%= doc["Modality"].to_s %> </td>
-	<td> <%= doc["Referring Physician's Name"].to_s %> </td>
-	<td> <%= doc["Patient's Name"].to_s %> </td>
-	<td> <%= doc["Study Date"].to_s %> </td>
-	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
-	<td> <%= link_to 'Download', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
-	<td> <%= link_to 'Share', {:controller=> 'exams', :action=> 'share' , :id=> doc["_id"].to_s }%> </td>
-	<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
-	</tr>
-	<%  } %>
-</table>
-<% else %>
-<table class="table">
-  <tr>
-    <th>Index</th>
-	<th>Type</th>
-    <th>Physician</th>
-	<th>Patient Name</th>
-	<th>Study Id</th>
-	<th>Show Media</th>
-	<th>Download Media</th>
-	<th>Share Media</th>
-  </tr>
-<%  MONGO_CLIENT["fs.files"].find({"accessList"=> current_user.name }).each_with_index  {|doc, counter| %>
-  <tr>
-	<td> <%= counter %> </td>
-	<td> <%= doc["Modality"].to_s %> </td>
-	<td> <%= doc["Referring Physician's Name"].to_s %> </td>
-	<td> <%= doc["Patient's Name"].to_s %> </td>
-	<td> <%= doc["Study Date"].to_s %> </td>
-	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
-	<td> <%= link_to 'Download', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
-	<td> <%= link_to 'Share', {:controller=> 'exams', :action=> 'share' , :id=> doc["_id"].to_s }%> </td>
-	</tr>
-<%  } %>
-</table>
-<%end%>
-<%end%>
+	<% count = MONGO_CLIENT["fs.files"].count() %>
+	<% if count == 0 %>
+	<p> No files found in database </p>
+	<% else %>
+	<% if current_user.admin == true %>
+		<table class="table">
+			<tr>
+				<th>Index</th>
+				<th>Type</th>
+				<th>Physician</th>
+				<th>Patient Name</th>
+				<th>Study Id</th>
+				<th>Show Media</th>
+				<th>Download Media</th>
+				<th>Share Media</th>
+				<th>Delete</th>
+			</tr>
+			<%  MONGO_CLIENT["fs.files"].find().each_with_index  {|doc, counter| %>
+			<tr>
+				<td> <%= counter %> </td>
+				<td> <%= doc["Modality"].to_s %> </td>
+				<td> <%= doc["Referring Physician's Name"].to_s %> </td>
+				<td> <%= doc["Patient's Name"].to_s %> </td>
+				<td> <%= doc["Study Date"].to_s %> </td>
+				<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
+				<td> <%= link_to 'Download', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
+				<td> <%= link_to 'Share', {:controller=> 'exams', :action=> 'share' , :id=> doc["_id"].to_s }%> </td>
+				<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
+			</tr>
+			<%  } %>
+		</table>
+	<% else %>
+		<table class="table">
+			<tr>
+				<th>Index</th>
+				<th>Type</th>
+				<th>Physician</th>
+				<th>Patient Name</th>
+				<th>Study Id</th>
+				<th>Show Media</th>
+				<th>Download Media</th>
+				<th>Share Media</th>
+			</tr>
+			<%  MONGO_CLIENT["fs.files"].find({"accessList"=> current_user.name }).each_with_index  {|doc, counter| %>
+			<tr>
+				<td> <%= counter %> </td>
+				<td> <%= doc["Modality"].to_s %> </td>
+				<td> <%= doc["Referring Physician's Name"].to_s %> </td>
+				<td> <%= doc["Patient's Name"].to_s %> </td>
+				<td> <%= doc["Study Date"].to_s %> </td>
+				<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
+				<td> <%= link_to 'Download', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
+				<td> <%= link_to 'Share', {:controller=> 'exams', :action=> 'share' , :id=> doc["_id"].to_s }%> </td>
+			</tr>
+			<%  } %>
+		</table>
+	<%end%>
+	<%end%>
+
 <%end%>

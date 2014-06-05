@@ -11,7 +11,6 @@
 	<th>Study Id</th>
 	<th>Show Media</th>
 	<th>Download Media</th>
-	<th>StaticView5</th>
 	<th>Delete</th>
   </tr>
  
@@ -24,13 +23,12 @@
 	<td> <%= doc["Study Date"].to_s %> </td>
 	<td> <%= link_to 'Show', {:controller=> 'exams', :action=> 'show' , :id=> doc["_id"].to_s }%> </td>
 	<td> <%= link_to 'Download as .bmp', {:controller=> 'exams', :action => 'download', :id => doc["_id"].to_s} %> </td>
-	<td> <%= link_to 'staticview5', {:controller=> 'exams', :action => 'dispImage', :id => doc["_id"].to_s, :frame =>1} %> </td>
-	<% if current_user.admin  %>
 	<td> <%= link_to 'Delete', {:controller=> 'exams', :action=> 'delete' , :id=> doc["_id"].to_s }%> </td>
-		<% end%>
   </tr>
 <%  } %>
 </table>
 <% end %>
-<p> Access Denied: You need to be an admin to access this page. <p>
+	<p> Access Denied: You need to be an admin to access this page. <p>
+<% else %>
+	<%= render 'shared/not_logged_in' %>
 <% end %>
