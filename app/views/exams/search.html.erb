@@ -24,10 +24,10 @@
 	<% 	end    %>
 	<h1>Search DICOM Images</h1>	
 	<% count = @cursor.count() %>
-	<% if count == 0 %>
+	<% if count == 0 and  (@parameter != "**" and @value != "**" ) %>
 		<p> No files found </p>
 	<% else %>
-	<% if current_user.admin == true %>
+	<% if current_user.admin == true and  (@parameter != "**" and @value != "**" )  %>
 		<table class="table">
 			<tr>
 				<th>Index</th>
@@ -54,7 +54,7 @@
 			</tr>
 			<%  } %>
 		</table>
-	<% else %>
+	<% elsif (@parameter != "**" and @value != "**" )  %>
 		<table class="table">
 			<tr>
 				<th>Index</th>
@@ -90,5 +90,5 @@
 	<% end %>
 
 <% else %>
-	<%= render 'static_pages/noLogin' %>
+	<%= render 'shared/not_logged_in' %>
 <% end %>

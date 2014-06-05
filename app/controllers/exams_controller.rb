@@ -59,9 +59,12 @@ class ExamsController < ApplicationController
 	
 	def addUser
 	userName = params[:user]
-
+	id = params[:id]
+	
 	if User.exists?(:name => userName)
-
+	
+	MONGO_CLIENT["fs.files"].update({"_id"=>BSON::ObjectId(id )}, { "$addToSet" => { "accessList" =>userName} } )
+	flash[:success] = "Image deleted."+id
 	redirect_to root_path
 	else
 
