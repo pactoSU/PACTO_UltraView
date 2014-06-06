@@ -64,10 +64,10 @@ class ExamsController < ApplicationController
 	if User.exists?(:name => userName)
 	
 	MONGO_CLIENT["fs.files"].update({"_id"=>BSON::ObjectId(id )}, { "$addToSet" => { "accessList" =>userName} } )
-	flash[:success] = "Image deleted."+id
+	flash[:success] = "File shared with "+userName+"."
 	redirect_to root_path
 	else
-
+	flash[:failure] = "User not found"
 	redirect_to  :back 
 	end
 

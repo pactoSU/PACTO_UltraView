@@ -7,7 +7,7 @@
 	<br> Physician's Name: <%= doc["Referring Physician's Name"].to_s %> 
 	<br> Patient's Name: <%= doc["Patient's Name"].to_s %> 
 	<br> Study Date: <%= doc["Study Date"].to_s %> 
-	<br> <br> Shared with users:
+	<br> <br> <strong> Shared with users: </strong>
 	<% acl = doc["accessList"] %> 
 	<% acl.each {|user| %> 
 	<br> <%=user %>
