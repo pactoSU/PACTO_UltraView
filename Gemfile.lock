@@ -4,12 +4,6 @@ GIT
   specs:
     database_cleaner (1.2.0)
 
-GIT
-  remote: git://github.com/tra/spawnling
-  revision: 42987a45f22156286ba44cf3f3a2e4a7e4b0efa8
-  specs:
-    spawnling (2.1.4)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -83,7 +77,6 @@ GEM
       nokogiri (>= 1.5.0)
       rails (>= 3.0.0)
     daemons (1.1.9)
-    dalli (2.7.2)
     dicom (0.9.5)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -283,7 +276,6 @@ DEPENDENCIES
   coffee-rails (= 4.0.1)
   cucumber-rails (= 1.4.0)
   daemons
-  dalli
   database_cleaner!
   dicom
   factory_girl_rails (= 4.2.1)
@@ -303,7 +295,6 @@ DEPENDENCIES
   sass-rails (= 4.0.1)
   sdoc (= 0.3.20)
   selenium-webdriver (= 2.35.1)
-  spawnling!
   spork-rails (= 4.0.0)
   sqlite3 (= 1.3.8)
   uglifier (= 2.1.1)

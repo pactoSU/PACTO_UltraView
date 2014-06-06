@@ -3,6 +3,7 @@ class ExamsController < ApplicationController
   
   def index
 	@cursor = MONGO_CLIENT["fs.files"].find("filename" => "A dicom file")
+	
   end
   
   def show
